@@ -22,9 +22,9 @@ const ItineraryItem = ({ title, details }) => {
     );
 };
 
-const ItineraryOwnRide = () => {
+const ItineraryOwnRide = ({navigation}) => {
     const handlePress = () => {
-        console.log('Continue pressed');
+        navigation.navigate("CancellationPolicyScreen")
     };
 
     return (

@@ -15,6 +15,9 @@ import TicketScreen from './src/screens/TicketScreen';
 import AddOns from './src/screens/AddOns';
 import BillBreakDown from './src/screens/BillBreakdown';
 import ItineraryOwnRide from './src/screens/ItineraryOwnRide';
+import CancellationPolicyScreen from './src/screens/CancellationPolicyScreen';
+import Payment from './src/screens/Payment';
+import BoardingPass from './src/screens/BoardingPass';
 
 
 
@@ -107,6 +110,41 @@ export default function App() {
             options={{
               headerShown: true,
               title: 'Itinerary', // Set the title of the header
+              headerStyle: { backgroundColor: '#f8f8f8' }, // Optional: customize header background
+              headerTintColor: '#333', // Optional: customize header text color
+              headerTitleStyle: { fontWeight: 'bold' }, // Optional: customize header title style
+            }}
+          />
+          <Stack.Screen
+            name="CancellationPolicyScreen"
+            component={CancellationPolicyScreen}
+            options={{
+              headerShown: true,
+              title: 'Cancellation Policy', // Set the title of the header
+              headerStyle: { backgroundColor: '#ff6666' }, // Optional: customize header background
+              headerTintColor: 'white', // Optional: customize header text color
+              headerTitleStyle: { fontWeight: 'bold', color: "white" }, // Optional: customize header title style
+            }}
+          />
+
+          <Stack.Screen
+            name="Payment"
+            component={Payment}
+            options={{
+              headerShown: true,
+              title: 'Payment', // Set the title of the header
+              headerStyle: { backgroundColor: '#f8f8f8' }, // Optional: customize header background
+              headerTintColor: '#333', // Optional: customize header text color
+              headerTitleStyle: { fontWeight: 'bold' }, // Optional: customize header title style
+            }}
+          />
+
+          <Stack.Screen
+            name="BoardingPass"
+            component={BoardingPass}
+            options={{
+              headerShown: true,
+              title: 'Payment', // Set the title of the header
               headerStyle: { backgroundColor: '#f8f8f8' }, // Optional: customize header background
               headerTintColor: '#333', // Optional: customize header text color
               headerTitleStyle: { fontWeight: 'bold' }, // Optional: customize header title style

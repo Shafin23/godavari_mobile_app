@@ -27,6 +27,7 @@ const AddOns = ({ navigation }) => {
                     seats={totalPassenger}
                     totalTicketPrice={2500}
                     margin={0}
+                    shouldShowSeatAndPrice={true}
                 />
 
                 <Text style={StyleSheet.create({ fontSize: 30, fontWeight: "bold", marginVertical: 20 })}>Additional services</Text>

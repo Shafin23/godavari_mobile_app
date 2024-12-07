@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
     container: {
         width: "100%",
         alignItems: 'center', // Center the dashed line within the container
-        marginVertical:20
+        marginVertical:20,
+        
     },
     dashedLine: {
         flexDirection: 'row',

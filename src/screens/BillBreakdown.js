@@ -21,6 +21,7 @@ const BillBreakDown = ({ navigation }) => {
                     location={{ start: 'Bhadrachalam', end: 'Pali Hills' }}
                     seats={totalPassenger}
                     totalTicketPrice={2500}
+                    shouldShowSeatAndPrice={true}
                 />
 
 

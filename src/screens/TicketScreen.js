@@ -70,6 +70,7 @@ const TicketScreen = ({ navigation }) => {
                     endTime="4:00 PM"
                     location={{ start: 'Bhadrachalam', end: 'Pali Hills' }}
                     seats={totalPassenger}
+                    shouldShowSeatAndPrice={true}
                 />
 
                 {/* Notification Section */}
