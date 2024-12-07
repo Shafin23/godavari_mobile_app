@@ -13,7 +13,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import PassengerDetails from '../components/PassengerDetails';
 import { AppContext } from '../context/AppContext';
 
-const TicketScreen = ({navigation}) => {
+const TicketScreen = ({ navigation }) => {
     const { totalPassenger } = useContext(AppContext); // Get the totalPassenger count
     const [passengerData, setPassengerData] = useState([]);
 
@@ -88,16 +88,22 @@ const TicketScreen = ({navigation}) => {
                     </View>
                 </View>
 
-                {/* Passenger Details Section */}
-                {passengerData.map((_, index) => (
-                    <PassengerDetails
-                        key={index}
-                        passengerNumber={index + 1}
-                        onNameChange={handleNameChange}
-                        onAgeChange={handleAgeChange}
-                        onGenderChange={handleGenderChange}
-                    />
-                ))}
+                <View style={styles.passengerDetails}>
+                    <Text style={styles.passengerDetailsText}>
+                        Passenger Details
+                    </Text>
+                    {/* Passenger Details Section */}
+                    {passengerData.map((_, index) => (
+                        <PassengerDetails
+                            key={index}
+                            passengerNumber={index + 1}
+                            onNameChange={handleNameChange}
+                            onAgeChange={handleAgeChange}
+                            onGenderChange={handleGenderChange}
+                            totalPassenger={totalPassenger}
+                        />
+                    ))}
+                </View>
             </ScrollView>
 
             {/* Footer Button */}
@@ -156,20 +162,42 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
     },
     continueButton: {
-        backgroundColor: '#FFC107',
+        backgroundColor: '#fdd951',
         paddingVertical: 15,
         margin: 20,
-        borderRadius: 8,
+        borderRadius: 25,
         alignItems: 'center',
     },
     continueButtonText: {
         fontSize: 16,
         fontWeight: 'bold',
-        color: '#FFF',
+        color: '#836702',
     },
     seatIcon: {
         marginRight: 5,
     },
+    passengerDetails: {
+        backgroundColor: "white",
+        margin: 10,
+        padding: 20,
+        borderRadius: 15,
+        borderWidth: 1, // Border width
+        borderColor: "#d3d3d3", // Light gray color for border
+        // Shadow for iOS
+        shadowColor: "gray", // Shadow color
+        shadowOffset: { width: 0, height: 2 }, // Offset for shadow
+        shadowOpacity: 0.25, // Opacity of shadow
+        shadowRadius: 3.84, // Blur radius
+        // Shadow for Android
+        elevation: 5, // Elevation to create shadow on Android
+    },
+
+    passengerDetailsText: {
+        fontSize: 28,
+        color: "#2b2939",
+        fontWeight: "bold",
+        marginBottom: 15
+    }
 });
 
 export default TicketScreen;

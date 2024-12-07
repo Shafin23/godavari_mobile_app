@@ -6,8 +6,9 @@ import {
     TextInput,
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker'; // Updated import
+import DashedLine from './DashedLine';
 
-const PassengerDetails = ({ passengerNumber, onNameChange, onAgeChange, onGenderChange }) => {
+const PassengerDetails = ({ totalPassenger, passengerNumber, onNameChange, onAgeChange, onGenderChange }) => {
     const [gender, setGender] = useState('Male'); // Default gender
 
     return (
@@ -61,8 +62,8 @@ const PassengerDetails = ({ passengerNumber, onNameChange, onAgeChange, onGender
                         </Picker>
                     </View>
                 </View>
-
             </View>
+            {totalPassenger !== passengerNumber && <DashedLine containerPadding={40} />}
         </View>
     );
 };
@@ -70,15 +71,6 @@ const PassengerDetails = ({ passengerNumber, onNameChange, onAgeChange, onGender
 const styles = StyleSheet.create({
     passengerDetailsContainer: {
         backgroundColor: '#FFFFFF',
-        padding: 15,
-        borderRadius: 10,
-        marginVertical: 10,
-        marginHorizontal:11,
-        elevation: 2,
-        shadowColor: '#000',
-        shadowOpacity: 0.1,
-        shadowOffset: { width: 0, height: 2 },
-        shadowRadius: 4,
     },
     passengerTitle: {
         fontSize: 16,
@@ -137,8 +129,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10, // Adds padding inside the picker
         color: '#333333',
         height: 150,
-        fontSize:40
-    }    
+        fontSize: 40
+    }
 });
 
 export default PassengerDetails;

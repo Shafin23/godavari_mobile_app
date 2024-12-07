@@ -5,14 +5,14 @@ import { AppContext } from '../context/AppContext';
 const PassengerSelector = ({ navigation }) => {
 
   const { setTotalPassenger, adultCount, setAdultCount, childCount, setChildCount } = useContext(AppContext)
-console.log(adultCount, childCount)
+  
   const increment = (type) => {
     if (type === 'adult') {
       setAdultCount(adultCount + 1);
     } else {
       setChildCount(childCount + 1);
     }
-    setTotalPassenger(prev=>prev+1)
+    setTotalPassenger(prev => prev + 1)
   };
 
 
@@ -23,7 +23,7 @@ console.log(adultCount, childCount)
     } else if (type === 'child' && childCount > 0) {
       setChildCount(childCount - 1);
     }
-    setTotalPassenger(prev=>prev-1)
+    setTotalPassenger(prev => prev - 1)
   };
 
   const handleAddPassengers = () => {
