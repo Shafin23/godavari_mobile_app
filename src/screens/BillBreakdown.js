@@ -2,8 +2,12 @@ import React, { useContext } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { AppContext } from '../context/AppContext';
 import TicketInfo from '../components/TicketInfo';
+import Insurence from '../components/Insurence';
+import DashedLine from '../components/DashedLine';
+import ServiceSection from '../components/ServiceSection';
+import ServiceItem from '../components/ServiceItem';
 
-const BillBreakDown = ({navigation}) => {
+const BillBreakDown = ({ navigation }) => {
     const { totalPassenger } = useContext(AppContext);
 
     return (
@@ -16,7 +20,26 @@ const BillBreakDown = ({navigation}) => {
                     endTime="4:00 PM"
                     location={{ start: 'Bhadrachalam', end: 'Pali Hills' }}
                     seats={totalPassenger}
+                    totalTicketPrice={2500}
                 />
+
+
+                <View style={StyleSheet.create({paddingHorizontal:15})}>
+                    <ServiceSection
+                        title="Other Recommendations"
+                    >
+                        <ServiceItem
+                            title="Tour Guide"
+                            price="1,500"
+                            onPress={() => handleAddService('Private Car (4 Seater)')}
+                        />
+                    </ServiceSection>
+                </View>
+
+
+                {/* Insurence */}
+                <View style={StyleSheet.create({ paddingHorizontal: 15 })}><Insurence marginBottom={10} /></View>
+                <DashedLine />
 
                 {/* Bill Breakdown Section */}
                 <View style={styles.billBreakdownSection}>

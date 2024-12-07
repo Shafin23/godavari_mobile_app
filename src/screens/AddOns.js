@@ -2,35 +2,14 @@ import React, { useContext } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { AppContext } from '../context/AppContext';
 import TicketInfo from '../components/TicketInfo';
+import ServiceItem from '../components/ServiceItem';
+import Insurence from '../components/Insurence';
+import ServiceSection from '../components/ServiceSection';
 
-// Reusable Component for Individual Services
-const ServiceItem = ({ title, price, onPress, buttonText = '+' }) => {
-    return (
-        <View style={styles.serviceItem}>
-            <View>
-                <Text style={styles.serviceTitle}>{title}</Text>
-                {price && <Text style={styles.servicePrice}>₹ {price}</Text>}
-            </View>
-            <TouchableOpacity style={styles.serviceButton} onPress={onPress}>
-                <Text style={styles.serviceButtonText}>{buttonText}</Text>
-            </TouchableOpacity>
-        </View>
-    );
-};
 
-// Reusable Component for Grouping Services
-const ServiceSection = ({ title, description, children }) => {
-    return (
-        <View style={styles.serviceSection}>
-            <Text style={styles.sectionTitle}>{title}</Text>
-            {description && <Text style={styles.sectionDescription}>{description}</Text>}
-            {children}
-            <View style={styles.dashedLine} />
-        </View>
-    );
-};
 
-const AddOns = ({navigation}) => {
+
+const AddOns = ({ navigation }) => {
     const { totalPassenger } = useContext(AppContext);
 
     const handleAddService = (service) => {
@@ -39,15 +18,18 @@ const AddOns = ({navigation}) => {
 
     return (
         <View style={styles.container}>
-            <ScrollView>
+            <ScrollView style={styles.scrollingContainer}>
                 <TicketInfo
                     serviceName="Haritha Boating Service"
                     startTime="10:00 AM"
                     endTime="4:00 PM"
                     location={{ start: 'Bhadrachalam', end: 'Pali Hills' }}
                     seats={totalPassenger}
+                    totalTicketPrice={2500}
+                    margin={0}
                 />
 
+                <Text style={StyleSheet.create({ fontSize: 30, fontWeight: "bold", marginVertical: 20 })}>Additional services</Text>
                 {/* Transportation Options */}
                 <ServiceSection
                     title="Transportation Options"
@@ -101,16 +83,11 @@ const AddOns = ({navigation}) => {
                     />
                 </ServiceSection>
 
-                {/* Insurance */}
-                <ServiceSection
-                    title="Insurance"
-                    description="At just ₹ 50 per passenger get: Insurance Coverage, Upto ₹ 70,000 on hospitalization & Upto ₹ 5,00,000 in case of Death/PTD"
-                >
-                    <ServiceItem
-                        title="Insurance"
-                        onPress={() => handleAddService('Insurance')}
-                    />
-                </ServiceSection>
+
+                {/* insurence */}
+                <Insurence/>
+
+
             </ScrollView>
 
             {/* Footer Button */}
@@ -122,62 +99,39 @@ const AddOns = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
+    scrollingContainer: {
+        padding: 15
+    }
+    ,
     container: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: 'white'
     },
     serviceSection: {
-        paddingHorizontal: 20,
         marginBottom: 20,
     },
     sectionTitle: {
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: 'bold',
         color: '#333',
-        marginBottom: 10,
+        marginBottom: 2,
     },
     sectionDescription: {
         fontSize: 14,
         color: '#666',
         marginBottom: 15,
     },
-    serviceItem: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: 15,
-    },
-    serviceTitle: {
-        fontSize: 16,
-        color: '#333',
-    },
-    servicePrice: {
-        fontSize: 14,
-        color: '#666',
-        marginTop: 5,
-    },
-    serviceButton: {
-        backgroundColor: '#007BFF',
-        paddingHorizontal: 20,
-        paddingVertical: 8,
-        borderRadius: 20,
-    },
-    serviceButtonText: {
-        fontSize: 16,
-        color: '#FFF',
-        fontWeight: 'bold',
-    },
     continueButton: {
-        backgroundColor: '#FFC107',
+        backgroundColor: '#fdd951',
         paddingVertical: 15,
-        margin:        20,
-        borderRadius: 8,
+        margin: 20,
+        borderRadius: 25,
         alignItems: 'center',
     },
     continueButtonText: {
         fontSize: 16,
         fontWeight: 'bold',
-        color: '#FFF',
+        color: '#836702',
     },
     dashedLine: {
         borderBottomWidth: 1,

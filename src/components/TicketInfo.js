@@ -1,15 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import DashedLine from './DashedLine';
 
-const { width } = Dimensions.get('window'); // Get the screen width
-
-const TicketInfo = ({ serviceName, startTime, endTime, location, seats }) => {
-    // Calculate the number of dashes dynamically based on the screen width
-    const dashCount = Math.floor(width / 14); // Adjust this value to control dash size and spacing
+const TicketInfo = ({ margin = 10, serviceName, startTime, endTime, location, seats, totalTicketPrice = false }) => {
 
     return (
-        <View style={styles.ticketInfoContainer}>
+        <View style={[styles.ticketInfoContainer, { margin }]}>
             {/* Service Name */}
             <Text style={styles.serviceName}>{serviceName}</Text>
 
@@ -23,12 +20,7 @@ const TicketInfo = ({ serviceName, startTime, endTime, location, seats }) => {
 
                 {/* Dashed Line Across the Boat Icon */}
                 <View style={styles.centerContainer}>
-                    <View style={styles.centerDashedLine}>
-                        {Array.from({ length: dashCount / 2.5 }).map((_, index) => (
-                            <View key={index} style={styles.dash} />
-                        ))}
-                    </View>
-
+                    <View style={StyleSheet.create({ position: "absolute" })}><DashedLine containerPadding={130} /></View>
                     {/* Boat Icon */}
                     <Icon name="boat" size={30} color="#007BFF" style={styles.boatIcon} />
                 </View>
@@ -40,17 +32,18 @@ const TicketInfo = ({ serviceName, startTime, endTime, location, seats }) => {
                 </View>
             </View>
 
-            {/* Bottom Custom Dashed Line */}
-            <View style={styles.bottomDashedLine}>
-                {Array.from({ length: dashCount }).map((_, index) => (
-                    <View key={index} style={styles.dash} />
-                ))}
-            </View>
+            {/* dash line */}
+            <View style={StyleSheet.create({ marginLeft: 5 })}><DashedLine containerPadding={30} /></View>
 
             {/* Seats Info */}
-            <View style={styles.rowSeats}>
-                <Icon name="person" size={20} color="#333" style={styles.seatIcon} />
-                <Text style={styles.seatsText}>{seats} Seats</Text>
+            <View style={styles.priceHolder}>
+                <View style={styles.rowSeats}>
+                    <Icon name="person" size={20} color="#333" style={styles.seatIcon} />
+                    <Text style={styles.seatsText}>{seats} Seats</Text>
+                </View>
+                <View >
+                    {totalTicketPrice && <Text style={styles.priceText}>₹ {totalTicketPrice}</Text>}
+                </View>
             </View>
         </View>
     );
@@ -61,7 +54,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
         borderRadius: 10,
         padding: 20,
-        margin: 10,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
@@ -80,7 +72,7 @@ const styles = StyleSheet.create({
         alignItems: 'start',
         marginBottom: 15,
     },
-    
+
     timeText: {
         fontSize: 22,
         fontWeight: 'bold',
@@ -90,16 +82,16 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: '#666',
         marginTop: 5,
-        fontWeight:"bold",
-        textAlign:"elft"
+        fontWeight: "bold",
+        textAlign: "elft"
     },
     locationText1: {
         fontSize: 14,
         color: '#666',
         marginTop: 5,
-        fontWeight:"bold",
-        textAlign:"right",
-        
+        fontWeight: "bold",
+        textAlign: "right",
+
     },
     centerContainer: {
         flex: 1,
@@ -110,7 +102,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         position: 'absolute',
         top: '30%',
-        left:"10%",
+        left: "5%",
         transform: [{ translateY: -0.5 }],
         zIndex: 0,
         width: '100%',
@@ -135,7 +127,7 @@ const styles = StyleSheet.create({
     rowSeats: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: 10,
+        marginTop: 10
     },
     seatIcon: {
         marginRight: 5,
@@ -144,6 +136,18 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#333',
         fontWeight: 'bold',
+    },
+    priceHolder: {
+        width: "100%",
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center"
+    },
+    priceText: {
+        fontWeight: "bold",
+        fontSize: 20
+
     }
 });
 
