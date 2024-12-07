@@ -77,7 +77,7 @@ const OtpVerificationScreen = ({ route, navigation }) => {
           {isResendDisabled ? `Resend OTP in ${formatTimer()}` : 'Resend OTP'}
         </Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={()=>navigation.navigate("EnterNumber")}>
+      <TouchableOpacity style={styles.button} onPress={()=>navigation.navigate("SinglePageAppication")}>
         <Text style={styles.buttonText}>Verify OTP</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={()=>navigation.navigate("SinglePageAppication")}>
