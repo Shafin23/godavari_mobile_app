@@ -7,16 +7,9 @@ import Home from "../subpages/Home"
 import BoardingPass from './BoardingPass';
 import Booking from '../subpages/Booking';
 import { AppContext } from '../context/AppContext';
+import ProfileScreen from './ProfileScreen';
 
 
-
-function SettingsScreen() {
-  return (
-    <View style={styles.screen}>
-      <Text>Settings Screen</Text>
-    </View>
-  );
-}
 
 // Create the Stack Navigator for the Home tab
 const HomeStack = createStackNavigator();
@@ -65,8 +58,8 @@ export default function SinglePageApplication() {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === 'Booking') {
             iconName = focused ? 'person' : 'person-outline';
-          } else if (route.name === 'Settings') {
-            iconName = focused ? 'settings' : 'settings-outline';
+          } else if (route.name === 'Profile') {
+            iconName = focused ? 'Profile' : 'settings-outline';
           }
 
           // Return the icon component
@@ -76,7 +69,7 @@ export default function SinglePageApplication() {
     >
       <Tab.Screen name="Home" component={HomeStackNavigator} />
       <Tab.Screen name="Booking" component={Booking} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
 }

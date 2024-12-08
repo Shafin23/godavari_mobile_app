@@ -62,7 +62,7 @@ const TicketScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <ScrollView>
+            <ScrollView style={StyleSheet.create({padding:10})}>
                 {/* Ticket Info Section */}
                 <TicketInfo
                     serviceName="Haritha Boating Service"
@@ -71,6 +71,7 @@ const TicketScreen = ({ navigation }) => {
                     location={{ start: 'Bhadrachalam', end: 'Pali Hills' }}
                     seats={totalPassenger}
                     shouldShowSeatAndPrice={true}
+                    containerPadding={ 40}
                 />
 
                 {/* Notification Section */}
@@ -118,7 +119,8 @@ const TicketScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F5F5F5',
+        backgroundColor: 'white',
+        // padding: 10
     },
     notificationContainer: {
         backgroundColor: '#ff6666',
@@ -194,10 +196,10 @@ const styles = StyleSheet.create({
     },
 
     passengerDetailsText: {
-        fontSize: 28,
+        fontSize: 23,
         color: "#2b2939",
         fontWeight: "bold",
-        marginBottom: 15
+        marginBottom: 8
     }
 });
 

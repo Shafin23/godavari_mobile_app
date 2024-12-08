@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image } from 'react-native';
+import { Dimensions } from 'react-native';
+
+
 
 const OtpVerificationScreen = ({ route, navigation }) => {
   const [otp, setOtp] = useState(['', '', '', '']); // Store OTP in an array
@@ -47,42 +50,63 @@ const OtpVerificationScreen = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <Image source={require('../../assets/images/boat.png')} style={styles.image} />
-      <Text style={styles.heading}>Verify Mobile Number</Text>
-      <Text style={styles.subheading}>
-        An OTP has been sent to {phoneNumber}.
-        {'\n'}Please enter the OTP below to sign in.
-      </Text>
-      <View style={styles.otpContainer}>
-        {otp.map((digit, index) => (
-          <TextInput
-            key={index}
-            style={styles.otpInput}
-            keyboardType="numeric"
-            maxLength={1}
-            value={digit}
-            onChangeText={(value) => handleOtpChange(value, index)}
-          />
-        ))}
-      </View>
-      <TouchableOpacity
-        style={[styles.resendButton, { opacity: isResendDisabled ? 0.5 : 1 }]}
-        disabled={isResendDisabled}
-        onPress={() => {
-          alert('OTP Resent!');
-          setTimer(120); // Reset timer
-          setIsResendDisabled(true);
-        }}
-      >
-        <Text style={styles.resendText}>
-          {isResendDisabled ? `Resend OTP in ${formatTimer()}` : 'Resend OTP'}
+
+      <View style={StyleSheet.create({ paddingHorizontal: 20 })}>
+        <Text style={styles.heading}>Verify Mobile Number</Text>
+        <Text style={styles.subheading}>
+          An OTP has been sent to {phoneNumber}.
+          {'\n'}Please enter the OTP below to sign in.
         </Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={()=>navigation.navigate("SinglePageAppication")}>
-        <Text style={styles.buttonText}>Verify OTP</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={()=>navigation.navigate("SinglePageAppication")}>
-        <Text style={styles.editNumber}>Incorrect mobile number? Edit now</Text>
-      </TouchableOpacity>
+
+        {/* otp and resend button */}
+        <View style={StyleSheet.create({ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "start" })}>
+          <View style={styles.otpContainer}>
+            {otp.map((digit, index) => (
+              <TextInput
+                key={index}
+                style={styles.otpInput}
+                keyboardType="numeric"
+                maxLength={1}
+                value={digit}
+                onChangeText={(value) => handleOtpChange(value, index)}
+              />
+            ))}
+          </View>
+          <TouchableOpacity
+            style={isResendDisabled ? styles.resendOTP : styles.enabledButton}
+            disabled={isResendDisabled}
+            onPress={() => {
+              alert('OTP Resent!');
+              setTimer(120); // Reset timer
+              setIsResendDisabled(true);
+            }}
+          >
+            <Text style={isResendDisabled ? styles.resetText : styles.enabledButtonText} >Resend</Text>
+          </TouchableOpacity>
+        </View>
+
+
+        <TouchableOpacity
+          style={[styles.resendButton, { opacity: isResendDisabled ? 0.5 : 1 }]}
+          disabled={isResendDisabled}
+          onPress={() => {
+            alert('OTP Resent!');
+            setTimer(120); // Reset timer
+            setIsResendDisabled(true);
+          }}
+        >
+          <Text style={styles.resendText}>
+            Resend OTP in <Text style={StyleSheet.create({ color: "#c59b02" })}>{formatTimer()}</Text>
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("SinglePageAppication")}>
+          <Text style={styles.buttonText}>Verify OTP</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("SinglePageAppication")}>
+          <Text style={styles.editNumber}>Incorrect mobile number? <Text style={StyleSheet.create({ color: "#c59b02", fontWeight:"bold" })}>Edit now</Text></Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -90,8 +114,10 @@ const OtpVerificationScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: "column",
+    justifyContent: "flex-start",
     backgroundColor: '#fff',
-    alignItems: 'center',
+    alignItems: 'flex-start'
   },
   image: {
     width: '100%',
@@ -99,21 +125,22 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   heading: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 5,
     textAlign: 'start',
+    color: "#494755"
   },
   subheading: {
     fontSize: 14,
-    color: '#555',
+    color: '#4f4b68',
     marginBottom: 20,
-    textAlign: 'center',
+    textAlign: 'start',
   },
   otpContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 20,
+    marginBottom: 7,
     width: '70%',
   },
   otpInput: {
@@ -131,25 +158,58 @@ const styles = StyleSheet.create({
   resendText: {
     fontSize: 14,
     color: '#888',
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "start"
+
   },
   button: {
     backgroundColor: '#FFD700',
     padding: 15,
     borderRadius: 30,
     alignItems: 'center',
-    width: '90%',
-    marginBottom: 20,
+    width: Dimensions.get('window').width * 0.9,
+    marginBottom: 20
   },
   buttonText: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
     color: '#836702',
   },
   editNumber: {
     fontSize: 14,
-    color: '#007BFF',
-    textDecorationLine: 'underline',
+    color: '#66627b',
+    textAlign: "center",
   },
+  resendOTP: {
+    backgroundColor: "#f2f7fd",
+    borderRadius: 10,
+    marginLeft: 10,
+    height: 48,
+    paddingHorizontal: 25,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  enabledButton: {
+    backgroundColor: "#97c6f3",
+    borderRadius: 10,
+    marginLeft: 10,
+    height: 48,
+    paddingHorizontal: 25,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  enabledButtonText: {
+    color: "#13375b",
+    fontWeight: "bold"
+  },
+  resetText: {
+    color: "#d1d0dd",
+    fontWeight: "bold"
+  }
 });
 
 export default OtpVerificationScreen;

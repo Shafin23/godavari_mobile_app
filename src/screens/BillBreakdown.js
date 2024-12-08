@@ -12,7 +12,8 @@ const BillBreakDown = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <ScrollView>
+            <ScrollView style={StyleSheet.create({ padding: 10 })}
+                contentContainerStyle={{ paddingBottom: 100 }}>
                 {/* Ticket Info */}
                 <TicketInfo
                     serviceName="Haritha Boating Service"
@@ -22,12 +23,48 @@ const BillBreakDown = ({ navigation }) => {
                     seats={totalPassenger}
                     totalTicketPrice={2500}
                     shouldShowSeatAndPrice={true}
+                    containerPadding={40}
                 />
 
+                <Text style={StyleSheet.create({ fontSize: 30, fontWeight: "bold", marginTop: 30, marginBottom: 5, paddingHorizontal: 15 })}>Additional services</Text>
 
-                <View style={StyleSheet.create({paddingHorizontal:15})}>
+                {/* Transportation Options */}
+                <View style={{ paddingHorizontal: 15 }}>
+                    <ServiceSection
+                        title="Transportation Options"
+                    >
+                        <ServiceItem
+                            title="Private Car (4 Seater)"
+                            price="500"
+                            // onPress={() => handleAddService('Private Car (4 Seater)')}
+                            hasTransportationTaken={true}
+                        />
+                    </ServiceSection>
+                </View>
+
+                {/* Meal Selection */}
+                <ServiceSection title="Meal Selection">
+                    <ServiceItem
+                        title="Breakfast & Snacks"
+                        price="500"
+                        buttonText="Add"
+                        // onPress={() => handleAddService('Breakfast & Snacks')}
+                        hasMealsTaken={true}
+                    />
+                    <ServiceItem
+                        title="Pure Veg Lunch"
+                        price="500"
+                        buttonText="Add"
+                        // onPress={() => handleAddService('Pure Veg Lunch')}
+                        hasMealsTaken={true}
+                    />
+                </ServiceSection>
+
+
+                <View style={StyleSheet.create({ paddingHorizontal: 15 })}>
                     <ServiceSection
                         title="Other Recommendations"
+                        containerPadding={25}
                     >
                         <ServiceItem
                             title="Tour Guide"
@@ -39,56 +76,66 @@ const BillBreakDown = ({ navigation }) => {
 
 
                 {/* Insurence */}
-                <View style={StyleSheet.create({ paddingHorizontal: 15 })}><Insurence marginBottom={10} /></View>
-                <DashedLine />
+                <View style={StyleSheet.create({ paddingHorizontal: 15 })}><Insurence marginBottom={6} /></View>
+                <DashedLine containerPadding={25} />
 
                 {/* Bill Breakdown Section */}
                 <View style={styles.billBreakdownSection}>
                     <Text style={styles.sectionTitle}>Bill Breakdown</Text>
 
-                    {/* Passenger Breakdown */}
-                    <View style={styles.row}>
-                        <Text style={styles.rowTitle}>
-                            <Text style={styles.icon}>👤</Text> 2 Passenger
-                        </Text>
-                    </View>
-                    <View style={styles.subRow}>
-                        <Text style={styles.subRowText}>• Adult 1</Text>
-                        <Text style={styles.subRowPrice}>₹ 1,500</Text>
-                    </View>
-                    <View style={styles.subRow}>
-                        <Text style={styles.subRowText}>• Child 1 (age 3 - 10)</Text>
-                        <Text style={styles.subRowPrice}>₹ 1,000</Text>
+                    <View style={StyleSheet.create({ marginBottom: 5 })}>
+                        {/* Passenger Breakdown */}
+                        <View style={styles.row}>
+                            <Text style={styles.rowTitle}>
+                                <Text style={styles.icon}>👤</Text> 2 Passenger
+                            </Text>
+                        </View>
+
+                        <View style={styles.subRow}>
+                            <Text style={styles.subRowText}>• Adult 1</Text>
+                            <Text style={styles.subRowPrice}>₹ 1,500</Text>
+                        </View>
+                        <View style={styles.subRow}>
+                            <Text style={styles.subRowText}>• Child 1 (age 3 - 10)</Text>
+                            <Text style={styles.subRowPrice}>₹ 1,000</Text>
+                        </View>
                     </View>
 
-                    {/* Transportation */}
-                    <View style={styles.row}>
-                        <Text style={styles.rowTitle}>Transportation</Text>
+                    <View style={StyleSheet.create({ marginBottom: 5 })}>
+                        {/* Transportation */}
+                        <View style={styles.row}>
+                            <Text style={styles.rowTitle}>Transportation</Text>
+                        </View>
+                        <View style={styles.subRow}>
+                            <Text style={styles.subRowText}>Private Car</Text>
+                            <Text style={styles.subRowPrice}>₹ 500</Text>
+                        </View>
                     </View>
-                    <View style={styles.subRow}>
-                        <Text style={styles.subRowText}>• Private Car</Text>
-                        <Text style={styles.subRowPrice}>₹ 500</Text>
-                    </View>
+
+
 
                     {/* Meals */}
                     <View style={styles.row}>
                         <Text style={styles.rowTitle}>Meal</Text>
                     </View>
                     <View style={styles.subRow}>
-                        <Text style={styles.subRowText}>• Breakfast & Snacks</Text>
+                        <Text style={styles.subRowText}>Breakfast & Snacks</Text>
                         <Text style={styles.subRowPrice}>₹ 500</Text>
                     </View>
                     <View style={styles.subRow}>
-                        <Text style={styles.subRowText}>• Pure Veg Lunch</Text>
+                        <Text style={styles.subRowText}>Pure Veg Lunch</Text>
                         <Text style={styles.subRowPrice}>₹ 500</Text>
                     </View>
 
+                    <DashedLine containerPadding={25} />
+
                     {/* GST */}
-                    <View style={styles.dashedLine} />
                     <View style={styles.row}>
                         <Text style={styles.rowTitle}>GST</Text>
                         <Text style={styles.rowPrice}>₹ 400</Text>
                     </View>
+                    <DashedLine containerPadding={25} />
+
 
                     {/* Total */}
                     <View style={styles.row}>
@@ -109,23 +156,21 @@ const BillBreakDown = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: 'white'
     },
     billBreakdownSection: {
-        paddingHorizontal: 20,
-        marginTop: 20,
+        paddingHorizontal: 15
     },
     sectionTitle: {
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: 'bold',
         color: '#333',
-        marginBottom: 15,
+        marginBottom: 5
     },
     row: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center',
-        marginVertical: 10,
+        alignItems: 'center'
     },
     rowTitle: {
         fontSize: 16,
@@ -141,7 +186,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginVertical: 5,
         paddingLeft: 20, // Indentation for sub-items
     },
     subRowText: {
@@ -169,16 +213,16 @@ const styles = StyleSheet.create({
         color: '#333',
     },
     continueButton: {
-        backgroundColor: '#FFC107',
+        backgroundColor: '#fdd951',
         paddingVertical: 15,
         margin: 20,
-        borderRadius: 8,
+        borderRadius: 25,
         alignItems: 'center',
     },
     continueButtonText: {
         fontSize: 16,
         fontWeight: 'bold',
-        color: '#FFF',
+        color: '#836702',
     },
     icon: {
         fontSize: 16,

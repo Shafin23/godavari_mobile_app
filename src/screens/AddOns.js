@@ -28,9 +28,10 @@ const AddOns = ({ navigation }) => {
                     totalTicketPrice={2500}
                     margin={0}
                     shouldShowSeatAndPrice={true}
+                    containerPadding={40}
                 />
 
-                <Text style={StyleSheet.create({ fontSize: 30, fontWeight: "bold", marginVertical: 20 })}>Additional services</Text>
+                <Text style={StyleSheet.create({ fontSize: 30, fontWeight: "bold", marginTop: 30, marginBottom:5 })}>Additional services</Text>
                 {/* Transportation Options */}
                 <ServiceSection
                     title="Transportation Options"
@@ -101,12 +102,11 @@ const AddOns = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     scrollingContainer: {
-        padding: 15
-    }
-    ,
+        padding: 20
+    },
     container: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
     },
     serviceSection: {
         marginBottom: 20,

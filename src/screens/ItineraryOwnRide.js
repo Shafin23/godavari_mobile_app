@@ -1,28 +1,32 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import DashedLine from '../components/DashedLine';
 
 const ItineraryItem = ({ title, details }) => {
     return (
         <View style={styles.itineraryItem}>
             <Text style={styles.title}>{title}</Text>
-            <View style={styles.content}>
-                <View style={styles.iconContainer}>
-                    <Icon name="boat" size={24} color="#007BFF" />
+            <View style={StyleSheet.create({ width: "80%" })}>
+                <View style={styles.content}>
+                    <View style={styles.iconContainer}>
+                        <Icon name="boat" size={24} color="#007BFF" />
+                    </View>
+                    <View style={styles.detailsContainer}>
+                        {details.map((detail, index) => (
+                            <Text key={index} style={styles.details}>
+                                {detail}
+                            </Text>
+                        ))}
+                    </View>
                 </View>
-                <View style={styles.detailsContainer}>
-                    {details.map((detail, index) => (
-                        <Text key={index} style={styles.details}>
-                            {detail}
-                        </Text>
-                    ))}
-                </View>
+                <DashedLine containerPadding={65} />
             </View>
         </View>
     );
 };
 
-const ItineraryOwnRide = ({navigation}) => {
+const ItineraryOwnRide = ({ navigation }) => {
     const handlePress = () => {
         navigation.navigate("CancellationPolicyScreen")
     };
@@ -38,7 +42,6 @@ const ItineraryOwnRide = ({navigation}) => {
                         'Utilize our Google Maps link or ask our team about destination guidance.',
                     ]}
                 />
-                <View style={styles.dashedLine} />
 
                 {/* Boating Point Section */}
                 <ItineraryItem
@@ -50,7 +53,7 @@ const ItineraryOwnRide = ({navigation}) => {
                         '• Breakfast',
                     ]}
                 />
-                <View style={styles.dashedLine} />
+
 
                 {/* Pali Hills Section */}
                 <ItineraryItem
@@ -62,7 +65,7 @@ const ItineraryOwnRide = ({navigation}) => {
                         'Enjoy the scenic beauty of the Godavari River. Participate in activities: Dancing, Live Karaoke.',
                     ]}
                 />
-                <View style={styles.dashedLine} />
+                
 
                 {/* Return Journey Section */}
                 <ItineraryItem
@@ -88,26 +91,40 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#FFFFFF',
+
     },
     scrollContainer: {
-        paddingHorizontal: 20,
-        paddingVertical: 10,
+        paddingHorizontal: 30,
+        paddingTop: 25,
+
     },
     itineraryItem: {
-        backgroundColor: '#E7F0FA',
-        borderRadius: 8,
-        padding: 15,
-        marginBottom: 10,
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "start",
+        position: "relative"
+
     },
     title: {
         fontSize: 16,
         fontWeight: 'bold',
         color: '#333',
         marginBottom: 10,
+        marginRight: 10,
+        width: "20%",
+        position: 'relative',
+        right: 5
+
     },
     content: {
-        flexDirection: 'row',
-        alignItems: 'flex-start',
+        // flexDirection: 'row',
+        // alignItems: 'flex-start',
+        width: "90%",
+        backgroundColor: '#E7F0FA',
+        borderRadius: 8,
+        padding: 15,
+        width:"100%"
     },
     iconContainer: {
         marginRight: 15,
@@ -129,14 +146,14 @@ const styles = StyleSheet.create({
         marginVertical: 10,
     },
     button: {
-        backgroundColor: '#007BFF',
+        backgroundColor: '#fdd951',
         paddingVertical: 15,
         margin: 20,
-        borderRadius: 8,
+        borderRadius: 25,
         alignItems: 'center',
     },
     buttonText: {
-        color: '#FFFFFF',
+        color: '#836702',
         fontSize: 16,
         fontWeight: 'bold',
     },

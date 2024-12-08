@@ -9,7 +9,7 @@ const Payment = ({ navigation }) => {
 
     return (
         < View style={styles.container}>
-            <ScrollView>
+            <ScrollView contentContainerStyle={{ padding: 10 }}>
                 {/* Ticket Info Section */}
                 < TicketInfo
                     serviceName="Haritha Boating Service"
@@ -19,6 +19,7 @@ const Payment = ({ navigation }) => {
                     }
                     seats={totalPassenger}
                     boardingPass={false}
+                    containerPadding={40}
                 />
             </ScrollView>
             <TouchableOpacity

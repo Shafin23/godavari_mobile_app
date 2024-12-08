@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import {
   View,
@@ -10,6 +11,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 const CancelTripScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const navigate = useNavigation()
 
   const handleCancelPress = () => {
     setModalVisible(true); // Show the modal
@@ -22,6 +24,7 @@ const CancelTripScreen = () => {
   const confirmCancel = () => {
     setModalVisible(false);
     alert('Trip cancelled!'); // Handle cancellation logic here
+    navigate.navigate("SplashScreen")
   };
 
   return (

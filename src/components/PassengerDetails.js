@@ -75,8 +75,8 @@ const styles = StyleSheet.create({
     passengerTitle: {
         fontSize: 16,
         fontWeight: 'bold',
-        color: '#333333',
-        marginBottom: 15,
+        color: '#2b2939',
+        marginBottom: 7,
     },
     inputContainer: {
         marginBottom: 20,

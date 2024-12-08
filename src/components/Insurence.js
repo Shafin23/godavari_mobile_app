@@ -3,12 +3,12 @@ import Icon from 'react-native-vector-icons/AntDesign';
 
 const Insurence = ({marginBottom=100}) => {
     return (
-        <View style={StyleSheet.create({ marginBottom: marginBottom, display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" })}>
+        <View style={StyleSheet.create({ marginBottom: marginBottom, display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "start" })}>
             {/* insurence information */}
             <View>
                 <Text style={StyleSheet.create({ fontSize: 22, color: "#2b2939", fontWeight: "bold" })} >Insurance</Text>
                 <Text style={StyleSheet.create({ color: "#767199", fontSize: 14 })}>At just ₹ 50 per passenger get :</Text>
-                <Text style={StyleSheet.create({ fontSize: 18, color: "#4f4b68" })}>Insurance Coverage</Text>
+                <Text style={StyleSheet.create({ fontSize: 18, color: "#4f4b68", fontWeight:"semi-bold", marginTop:10 })}>Insurance Coverage</Text>
                 <Text>Upto ₹ 70,00 on hospitalization &</Text>
                 <Text>Upto ₹ 5,00,00 in case of Death/PTD</Text>
             </View>

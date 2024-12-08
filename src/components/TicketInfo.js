@@ -12,7 +12,7 @@ import LeftBorderCircle from "./RightBorderCircle";
 const TicketInfoContainer = ({ header, text, textAlign = "left" }) => {
     return (
         <View>
-            <Text style={{ fontWeight: "bold", fontSize: 20, color: "#2b2939" }}>
+            <Text style={{ fontWeight: "bold", fontSize: 20, color: "#4f4b68" }}>
                 {header}
             </Text>
             <Text
@@ -39,7 +39,7 @@ const TicketInfo = ({
     seats,
     totalTicketPrice = null,
     boardingPass = true,
-    containerPadding=30
+    containerPadding = 30
 
 }) => {
     return (
@@ -53,7 +53,7 @@ const TicketInfo = ({
                 <Text style={StyleSheet.create({ color: "767199", marginBottom: 15 })}>Wed, Jul 7 - 2023</Text>
 
                 <RightBorderCircle />
-                <LeftBorderCircle/>
+                <LeftBorderCircle />
 
 
                 <View style={styles.row}>
@@ -64,7 +64,7 @@ const TicketInfo = ({
 
                     <View style={styles.centerContainer}>
                         <View style={{ position: "absolute" }}>
-                            <DashedLine containerPadding={130} />
+                            <DashedLine containerPadding={140} />
                         </View>
                         <Icon name="boat" size={30} color="#007BFF" style={styles.boatIcon} />
                     </View>
@@ -127,7 +127,7 @@ const TicketInfo = ({
 
                             <View style={styles.row}>
                                 <Text style={styles.rowTitle}>
-                                    <Text style={styles.icon}>👤</Text> 2 Passenger
+                                    <Text style={{ color: "#4f4b68" }}>👤</Text> 2 Passenger
                                 </Text>
                             </View>
                             <View style={styles.subRowPassenger}>
@@ -139,14 +139,20 @@ const TicketInfo = ({
                                 <Text style={styles.subRowPrice}>₹ 1,000</Text>
                             </View>
 
-                            <View style={styles.row}>
-                                <Text style={styles.rowTitle}>Transportation</Text>
-                            </View>
-                            <View style={styles.subRow}>
-                                <Text style={styles.subRowText}>Private Car</Text>
-                                <Text style={styles.subRowPrice}>₹ 500</Text>
+
+                            {/* transportation */}
+                            <View style={{marginVertical:6}}>
+                                <View style={styles.row}>
+                                    <Text style={styles.rowTitle}>Transportation</Text>
+                                </View>
+                                <View style={styles.subRow}>
+                                    <Text style={styles.subRowText}>Private Car</Text>
+                                    <Text style={styles.subRowPrice}>₹ 500</Text>
+                                </View>
                             </View>
 
+
+                            {/* meal */}
                             <View style={styles.row}>
                                 <Text style={styles.rowTitle}>Meal</Text>
                             </View>
@@ -159,11 +165,12 @@ const TicketInfo = ({
                                 <Text style={styles.subRowPrice}>₹ 500</Text>
                             </View>
 
-                            <View>
-                                <DashedLine containerPadding={25} />
+
+                            <View style={StyleSheet.create({ marginLeft: 12 })}>
+                                <DashedLine containerPadding={37} />
                             </View>
                             <View style={styles.row}>
-                                <Text style={styles.totalText}>Total (taxes included)</Text>
+                                <Text style={styles.totalText}><Text style={{ fontSize: 17 }}>Total</Text> (taxes included)</Text>
                                 <Text style={styles.totalPrice}>₹ 4,400</Text>
                             </View>
                         </View>}
@@ -273,7 +280,7 @@ const styles = StyleSheet.create({
     rowTitle: {
         fontSize: 16,
         fontWeight: "bold",
-        color: "#333",
+        color: "#4f4b68",
     },
     rowPrice: {
         fontSize: 16,
@@ -282,20 +289,20 @@ const styles = StyleSheet.create({
     },
     subRowText: {
         fontSize: 14,
-        color: "#666",
+        color: "#4f4b68",
     },
     subRowPassenger: {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        marginVertical: 5,
+        marginVertical: 0,
         paddingLeft: 20,
     },
     subRow: {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        marginVertical: 5,
+        marginVertical: 0,
         paddingLeft: 1,
     },
     subRowPrice: {
@@ -306,12 +313,21 @@ const styles = StyleSheet.create({
     sectionTitle: {
         fontSize: 20,
         fontWeight: "bold",
-        color: "#333",
+        color: "#4f4b68",
         marginBottom: 15,
     },
     billBreakdownSection: {
         marginTop: 30,
     },
+    totalText: {
+        fontWeight: 'bold',
+        color: "#4f4b68"
+    },
+    totalPrice: {
+        fontWeight: "bold",
+        fontSize: 18,
+        color: "#4f4b68"
+    }
 });
 
 export default TicketInfo;

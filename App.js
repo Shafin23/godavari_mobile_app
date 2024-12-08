@@ -19,6 +19,8 @@ import CancellationPolicyScreen from './src/screens/CancellationPolicyScreen';
 import Payment from './src/screens/Payment';
 import BoardingPass from './src/screens/BoardingPass';
 import CancelBookingScreen from './src/screens/CancelBookingScreen';
+import SplashScreen from './src/screens/SplashScreen';
+
 
 
 
@@ -111,9 +113,9 @@ export default function App() {
             options={{
               headerShown: true,
               title: 'Itinerary', // Set the title of the header
-              headerStyle: { backgroundColor: '#f8f8f8' }, // Optional: customize header background
-              headerTintColor: '#333', // Optional: customize header text color
-              headerTitleStyle: { fontWeight: 'bold' }, // Optional: customize header title style
+              headerStyle: { backgroundColor: '#b5d3f5' }, // Optional: customize header background
+              headerTintColor: 'white', // Optional: customize header text color
+              headerTitleStyle: { fontWeight: 'bold', color: "white" }, // Optional: customize header title style
             }}
           />
           <Stack.Screen
@@ -160,7 +162,15 @@ export default function App() {
               title: 'Cancel Booking', // Set the title of the header
               headerStyle: { backgroundColor: '#ff6666' }, // Optional: customize header background
               headerTintColor: 'white', // Optional: customize header text color
-              headerTitleStyle: { fontWeight: 'bold', color:"white" }, // Optional: customize header title style
+              headerTitleStyle: { fontWeight: 'bold', color: "white" }, // Optional: customize header title style
+            }}
+          />
+
+          <Stack.Screen
+            name="SplashScreen"
+            component={SplashScreen}
+            options={{
+              headerShown: false,
             }}
           />
         </Stack.Navigator>

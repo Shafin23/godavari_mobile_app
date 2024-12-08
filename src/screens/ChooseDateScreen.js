@@ -70,19 +70,19 @@ const styles = StyleSheet.create({
   },
   calendarContainer: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'start',
     marginBottom: 20,
   },
   confirmButton: {
-    backgroundColor: '#FFC107',
+    backgroundColor: '#fdd951',
     paddingVertical: 15,
-    borderRadius: 10,
+    borderRadius: 25,
     alignItems: 'center',
   },
   confirmButtonText: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#836702',
   },
 });
 

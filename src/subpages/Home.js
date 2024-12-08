@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+// import MapView, { Marker } from 'react-native-maps';
 import { useNavigation } from '@react-navigation/native';
 import { AppContext } from '../context/AppContext';
 
-
 const Home = () => {
-  const { totalPassenger, bookingDate, adultCount, childCount } = useContext(AppContext)
+  const { totalPassenger, bookingDate, adultCount, childCount } = useContext(AppContext);
   const navigation = useNavigation();
   const [selectedPlace, setSelectedPlace] = useState('Pochavaram boating point'); // Default place
 
@@ -16,8 +16,6 @@ const Home = () => {
     "Rajahmundry boating point": { latitude: 17.0052, longitude: 81.7774 },
     "Papikondalu boating point": { latitude: 17.4306, longitude: 81.4984 },
   };
-
-
 
   const selectedCoordinates = placeCoordinates[selectedPlace];
 
@@ -55,21 +53,44 @@ const Home = () => {
           onPress={() => navigation.navigate("PassengerSelector")}
         >
           <Text style={styles.selectorIcon}>👤</Text>
-          <Text style={styles.selectorText}>{totalPassenger ? `Adult ${adultCount}, Children ${childCount}` : "Select passenger"}</Text>
+          <Text style={styles.selectorText}>
+            {totalPassenger ? `Adult ${adultCount}, Children ${childCount}` : "Select passenger"}
+          </Text>
         </TouchableOpacity>
 
         <Text style={styles.heading}>Booking Point Location</Text>
 
+        {/* Google Map Integration */}
+        <View style={styles.mapContainer}>
+          {/* <MapView
+            style={styles.map}
+            initialRegion={{
+              latitude: selectedCoordinates.latitude,
+              longitude: selectedCoordinates.longitude,
+              latitudeDelta: 0.05,
+              longitudeDelta: 0.05,
+            }}
+          >
+            <Marker
+              coordinate={{
+                latitude: selectedCoordinates.latitude,
+                longitude: selectedCoordinates.longitude,
+              }}
+              title={selectedPlace}
+              description="Boating point"
+            />
+          </MapView> */}
+        </View>
+
         <TouchableOpacity
           style={(totalPassenger > 0 && bookingDate) ? styles.button : styles.disabledButton}
           onPress={() => navigation.navigate('BoatListScreen')}
-          disabled={!(totalPassenger > 0 && bookingDate)} // Corrected condition
+          disabled={!(totalPassenger > 0 && bookingDate)}
         >
           <Text style={(totalPassenger > 0 && bookingDate) ? styles.buttonText : styles.disabledButtonText}>
             See available boats
           </Text>
         </TouchableOpacity>
-
       </View>
     </ScrollView>
   );
@@ -84,11 +105,11 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   heading: {
-    textAlign: "left", // Corrected from "start"
+    textAlign: "left",
     fontSize: 20,
     fontWeight: "bold",
     width: "90%",
-    alignSelf: "center", // Replace margin: "0 auto"
+    alignSelf: "center",
     marginTop: 10,
   },
   container: {
@@ -98,7 +119,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 200, // Adjust the height as needed
+    height: 200,
     marginBottom: 20,
   },
   dropdownContainer: {
@@ -139,7 +160,7 @@ const styles = StyleSheet.create({
   },
   mapContainer: {
     width: '90%',
-    height: 160,
+    height: 200,
     marginTop: 10,
     borderRadius: 10,
     overflow: 'hidden',

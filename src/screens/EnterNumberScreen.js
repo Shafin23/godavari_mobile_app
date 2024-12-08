@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image } from 'react-native';
 
-const EnterNumberScreen = ({navigation}) => {
+const EnterNumberScreen = ({ navigation }) => {
   const [phoneNumber, setPhoneNumber] = useState('');
 
-    // Check if the phone number is valid (10 digits typed by the user)
+  // Check if the phone number is valid (10 digits typed by the user)
   const isPhoneNumberValid = phoneNumber.length === 10;
 
   return (
@@ -12,7 +12,7 @@ const EnterNumberScreen = ({navigation}) => {
       <Image source={require('../../assets/images/boat.png')} style={styles.image} />
       <Text style={styles.heading}>Create Account or Sign in</Text>
       <View style={styles.inputContainer}>
-        <Text style={styles.prefix}>+880</Text>
+        <Text style={styles.prefix}>+91  |</Text>
         <TextInput
           style={styles.input}
           placeholder="Enter your mobile number"
@@ -26,7 +26,7 @@ const EnterNumberScreen = ({navigation}) => {
         disabled={!isPhoneNumberValid}
         onPress={() => navigation.navigate('OtpVerification')}
       >
-        <Text style={styles.buttonText}>Generate OTP</Text>
+        <Text style={[styles.buttonText, !isPhoneNumberValid && styles.buttonDisabledText]}>Generate OTP</Text>
       </TouchableOpacity>
     </View>
   );
@@ -47,8 +47,8 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 20,
     fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 20,
+    textAlign: 'left',
+    marginBottom: 10,
     width: '90%',
   },
   inputContainer: {
@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     padding: 10,
+    fontSize: 15
   },
   button: {
     backgroundColor: '#FFD700',
@@ -79,13 +80,16 @@ const styles = StyleSheet.create({
     width: '90%',
   },
   buttonDisabled: {
-    backgroundColor: '#cccccc', // Lighter color for disabled button
+    backgroundColor: '#feefb8', // Lighter color for disabled button
   },
   buttonText: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
-    color: '#000',
+    color: '#836702',
   },
+  buttonDisabledText: {
+    color: "#fddf72"
+  }
 });
 
 export default EnterNumberScreen;
