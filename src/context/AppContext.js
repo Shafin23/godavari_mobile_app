@@ -12,6 +12,7 @@ export const AppProvider = ({ children }) => {
   const [totalPassenger, setTotalPassenger] = useState(0)// pick the number of total passenger 
   const [adultCount, setAdultCount] = useState(1);
   const [childCount, setChildCount] = useState(0);
+  const [viewBoardingPass, setViewBoardingPass] = useState(false) // it is needed to navigate view boarding pass in booking tab. Based on true and false we will show noTicket component or Ticket component
   //  ====================================================
 
   // Global state methods (optional)
@@ -33,12 +34,15 @@ export const AppProvider = ({ children }) => {
     bookingDate,
     setBookingDate,
     totalPassenger,
-    setTotalPassenger, 
+    setTotalPassenger,
 
     adultCount,
     childCount,
     setAdultCount,
-    setChildCount
+    setChildCount, 
+
+    viewBoardingPass,
+    setViewBoardingPass
   }
 
   return (

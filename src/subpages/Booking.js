@@ -1,66 +1,41 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet, View, Text, TouchableOpacity, FlatList } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 import ActiveTab from "../components/ActiveTab";
 import InactiveTab from "../components/InacvtiveTab";
 import { Image } from "react-native";
-
-
-// Sample data for Past Bookings (Active bookings will be shown in the ActiveTab component)
-const pastBookings = [
-    {
-        id: "2",
-        serviceName: "Haritha Boating Service",
-        time: "7:00 AM - 3:00 PM",
-        passenger: "2 Seats",
-        name: "John Doe",
-        phone: "9876543210",
-        bookingId: "ABCD123456",
-        status: "Cancelled",
-        refundStatus: "Refunded",
-    },
-    {
-        id: "3",
-        serviceName: "Haritha Boating Service",
-        time: "7:00 AM - 3:00 PM",
-        passenger: "2 Seats",
-        name: "John Doe",
-        phone: "9876543210",
-        bookingId: "ABCD123456",
-        status: "Completed",
-    },
-];
-
-// Reusable Ticket Card Component
-const TicketCard = ({ ticket }) => (
-    <View style={styles.ticketCard}>
-        <Text style={styles.serviceName}>{ticket.serviceName}</Text>
-        <Text style={styles.time}>{ticket.time}</Text>
-        <Text style={styles.details}>Name: {ticket.name}</Text>
-        <Text style={styles.details}>Phone No: {ticket.phone}</Text>
-        <Text style={styles.details}>Passenger: {ticket.passenger}</Text>
-        <Text style={styles.details}>Booking ID: {ticket.bookingId}</Text>
-        {ticket.refundStatus && (
-            <Text style={styles.refundStatus}>Refund Status: {ticket.refundStatus}</Text>
-        )}
-    </View>
-);
+import { AppContext } from "../context/AppContext";
+import NoTicket from "../components/NoTicket";
+import DownLoadTicket from "../components/DownloadTicket";
 
 const Booking = () => {
     const [activeTab, setActiveTab] = useState("Active");
+    const { viewBoardingPass, setViewBoardingPass } = useContext(AppContext);
+
+    // Reset viewBoardingPass when the component loses focus
+    useFocusEffect(
+        React.useCallback(() => {
+            // No action on focus, but cleanup on blur
+            return () => {
+                setViewBoardingPass(false);
+            };
+        }, [setViewBoardingPass])
+    );
 
     const renderContent = () => {
-        if (activeTab === "Active") {
+        if (activeTab === "Active" && !viewBoardingPass) {
             return <ActiveTab />; // Render the ActiveTab component
-        }
-
-        else {
-            return <InactiveTab/>
+        } else if (activeTab === "Active" && viewBoardingPass) {
+            return <DownLoadTicket/>;
+        } else {
+            return <InactiveTab />;
         }
     };
 
     return (
         <View style={styles.container}>
             <Image source={require('../../assets/images/boat.png')} style={styles.image} />
+
             {/* Tabs */}
             <View style={styles.tabContainer}>
                 <TouchableOpacity
@@ -73,7 +48,10 @@ const Booking = () => {
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.tab, activeTab === "Past Booking" && styles.activeTab]}
-                    onPress={() => setActiveTab("Past Booking")}
+                    onPress={() => {
+                        setActiveTab("Past Booking");
+                        setViewBoardingPass(false);
+                    }}
                 >
                     <Text
                         style={activeTab === "Past Booking" ? styles.activeTabText : styles.tabText}
@@ -93,7 +71,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "white",
-        padding: 16,
     },
     tabContainer: {
         flexDirection: "row",
@@ -102,6 +79,7 @@ const styles = StyleSheet.create({
         borderRadius: 30, // Rounded tabs
         padding: 4,
         marginBottom: 16,
+        marginHorizontal: 15,
     },
     tab: {
         flex: 1,
@@ -122,6 +100,7 @@ const styles = StyleSheet.create({
     },
     ticketContainer: {
         flex: 1,
+        padding: 15,
     },
     ticketCard: {
         backgroundColor: "#fff",
@@ -152,6 +131,10 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: "bold",
         color: "#28a745",
+    },
+    image: {
+        width: "100%",
+        marginBottom: 20,
     },
 });
 

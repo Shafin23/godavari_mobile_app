@@ -18,6 +18,7 @@ import ItineraryOwnRide from './src/screens/ItineraryOwnRide';
 import CancellationPolicyScreen from './src/screens/CancellationPolicyScreen';
 import Payment from './src/screens/Payment';
 import BoardingPass from './src/screens/BoardingPass';
+import CancelBookingScreen from './src/screens/CancelBookingScreen';
 
 
 
@@ -148,6 +149,18 @@ export default function App() {
               headerStyle: { backgroundColor: '#f8f8f8' }, // Optional: customize header background
               headerTintColor: '#333', // Optional: customize header text color
               headerTitleStyle: { fontWeight: 'bold' }, // Optional: customize header title style
+            }}
+          />
+
+          <Stack.Screen
+            name="CancelBookingScreen"
+            component={CancelBookingScreen}
+            options={{
+              headerShown: true,
+              title: 'Cancel Booking', // Set the title of the header
+              headerStyle: { backgroundColor: '#ff6666' }, // Optional: customize header background
+              headerTintColor: 'white', // Optional: customize header text color
+              headerTitleStyle: { fontWeight: 'bold', color:"white" }, // Optional: customize header title style
             }}
           />
         </Stack.Navigator>

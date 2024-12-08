@@ -14,7 +14,7 @@ const InactiveTab = () => {
                 location={{ start: "Bhadrachalam", end: "Pali Hills" }}
                 seats={totalPassenger}
                 shouldShowSeatAndPrice={false}
-                containerPadding={40}
+                containerPadding={45}
             />
 
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -6,24 +6,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Home from "../subpages/Home"
 import BoardingPass from './BoardingPass';
 import Booking from '../subpages/Booking';
+import { AppContext } from '../context/AppContext';
 
 
-function HomeDetailsScreen() {
-  return (
-    <View style={styles.screen}>
-      <Text>Home Details Screen</Text>
-    </View>
-  );
-}
-
-// Components for the Profile and Settings tabs
-function ProfileScreen() {
-  return (
-    <View style={styles.screen}>
-      <Text>Profile Screen</Text>
-    </View>
-  );
-}
 
 function SettingsScreen() {
   return (
@@ -64,7 +49,8 @@ function HomeStackNavigator() {
 // Create the Bottom Tab Navigator
 const Tab = createBottomTabNavigator();
 
-export default function SinglePageApplication() {
+export default function SinglePageApplication() { 
+  const {setViewBoardingPass} = useContext(AppContext)
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({

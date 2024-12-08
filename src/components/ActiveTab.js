@@ -2,9 +2,18 @@ import { useContext } from "react"
 import TicketInfo from "./TicketInfo"
 import { AppContext } from "../context/AppContext"
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { useNavigation } from "@react-navigation/native"
 
 const ActiveTab = () => {
     const { totalPassenger } = useContext(AppContext)
+    const { setViewBoardingPass } = useContext(AppContext)
+    const navigation = useNavigation()
+
+    const handlePress = () => {
+        setViewBoardingPass(prev => !prev)
+        // navigation.navigate('EnterNumber')
+    }
+
     return (
         <View>
             <TicketInfo
@@ -14,14 +23,14 @@ const ActiveTab = () => {
                 location={{ start: "Bhadrachalam", end: "Pali Hills" }}
                 seats={totalPassenger}
                 shouldShowSeatAndPrice={false}
-                containerPadding={40}
+                containerPadding={45}
             />
 
             <TouchableOpacity
                 style={styles.button}
-                onPress={() => navigation.navigate('EnterNumber')} // Navigate to EnterNumber screen
+                onPress={handlePress} // Navigate to EnterNumber screen
             >
-                <Text style={styles.buttonText}>Book a experience →</Text>
+                <Text style={styles.buttonText}>View Boading Pass →</Text>
             </TouchableOpacity>
         </View>
     )
